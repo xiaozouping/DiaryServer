@@ -1,10 +1,10 @@
 package com.diary.diaryserver.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.List;
 
 @Data
 public class Admin {
@@ -18,6 +18,7 @@ public class Admin {
     private Date birth_day;
     private String admin_state;
     private String admin_rank;
-    private Timestamp create_time;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Timestamp create_time;
 }

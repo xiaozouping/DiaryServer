@@ -18,4 +18,25 @@ public class WorksServiceImpl implements WorksService {
     public List<Works> findWorks(String userId){
         return worksDao.selectWorks(userId);
     }
+
+    @Override
+    public int addWorks(Works works){
+        return worksDao.addWorks(works);
+    }
+
+    @Override
+    public int findTitle(String works_title,String userId){
+        return worksDao.findTitle(works_title,userId);
+    }
+
+    @Override
+    public int deleteWorks(int works_id){
+        return worksDao.deleteWorks(works_id);
+    }
+
+    @Override
+    public int updateWorks(String beworks_title,String works_title,String userId){
+        return worksDao.updateWorks(beworks_title,works_title,userId);
+    }
+
 }

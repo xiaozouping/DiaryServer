@@ -19,8 +19,19 @@ public class DiaryServiceImpl implements DiaryService {
         return diaryDao.selectDiaryByUser(userId);
     }
 
+    @Override
     public int addDiary(Diary diary){
         return diaryDao.insertDiary(diary);
+    }
+
+    @Override
+    public int updateDiary(Diary diary){
+        return diaryDao.updateDiary(diary);
+    }
+
+    @Override
+    public int deleteDiary(int diaryId){
+        return diaryDao.deleteDiary(diaryId);
     }
 
 }

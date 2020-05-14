@@ -7,7 +7,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 //解决跨域问题
 @Configuration
 public class Crosconfig implements WebMvcConfigurer {
-
     @Override
     public void addCorsMappings(CorsRegistry registry){
         registry.addMapping("/**")
@@ -17,5 +16,4 @@ public class Crosconfig implements WebMvcConfigurer {
                 .maxAge(3600)
                 .allowedHeaders("*");
     }
-
 }

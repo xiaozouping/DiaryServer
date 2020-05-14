@@ -1,16 +1,18 @@
 spring:
+#  数据库配置
   datasource:
     url: jdbc:mysql://localhost:3306/diary?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
-#  jpa:
-#    show-sql: true
-#    properties:
-#      hibernate:
-#        format_sql: true
+#时间格式
+#  jackson:
+#    date-format: yyyy-MM-dd HH:mm:ss
+#    time-zone: GMT+8
+
 server:
   port: 8181
+
 
 #mybtais
 #  mybatis:
