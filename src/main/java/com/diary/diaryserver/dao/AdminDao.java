@@ -1,6 +1,7 @@
 package com.diary.diaryserver.dao;
 
 import com.diary.diaryserver.bean.Admin;
+import com.diary.diaryserver.bean.Page;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -14,6 +15,9 @@ public interface AdminDao {
 
     @Select("select * from admin order by create_time desc")
     List<Admin> selectAdminAll();     //查看管理员全部数据
+
+//    @Select("select * from admin order by create_time desc")
+//    Page selectAdminAll1();     //查看管理员全部数据
 
     @Update("update admin set admin_state = '1' where id = #{id}")
     int deleteAdmin(int id);    //将管理员帐号变成无效,物理删除

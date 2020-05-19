@@ -4,7 +4,10 @@ import com.diary.diaryserver.bean.Admin;
 import com.diary.diaryserver.bean.Page;
 import com.diary.diaryserver.dao.AdminDao;
 import com.diary.diaryserver.service.AdminService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,15 +54,6 @@ public class AdminServiceImpl implements AdminService{
         return adminDao.loginAdmin(admin);
     }
 
-//    public List<Admin> pageAdminList(int currPage, int pageSize){
-//        //查询全部数据
-//        List<Admin> adminList = adminDao.selectAdminAll();
-//        //从第几条数据开始
-//        int firstIndex = (currPage - 1) * pageSize;
-//        //到第几条数据结束
-//        int lastIndex = currPage * pageSize;
-//        return Admin.subList(firstIndex, lastIndex); //直接在list中截取
-//    }
 
     @Override
     public Admin findUsername(Admin admin){
@@ -77,25 +71,25 @@ public class AdminServiceImpl implements AdminService{
 
 
 
-    @Override
-    public Page<Admin> adminPage(int page,int size) {
-
-//		总记录数
-        int count=adminDao.count();
-
-//		第page+1页的数据
-        List<Admin> list=adminDao.find(size, size*page );
-
-//		向上取整计算出页数
-        int total=(int)Math.ceil(Double.valueOf(count)/size);
-
-        Page<Admin> adminPage=new Page<>();
-
-        adminPage.setData(list);
-        adminPage.setTotal(total);
-        adminPage.setCurrent(page);
-
-        return adminPage;
-    }
+//    @Override
+//    public Page<Admin> adminPage(int page,int size) {
+//
+////		总记录数
+//        int count=adminDao.count();
+//
+////		第page+1页的数据
+//        List<Admin> list=adminDao.find(size, size*page );
+//
+////		向上取整计算出页数
+//        int total=(int)Math.ceil(Double.valueOf(count)/size);
+//
+//        Page<Admin> adminPage=new Page<>();
+//
+//        adminPage.setData(list);
+//        adminPage.setTotal(total);
+//        adminPage.setCurrent(page);
+//
+//        return adminPage;
+//    }
 
 }

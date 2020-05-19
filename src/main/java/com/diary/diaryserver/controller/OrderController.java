@@ -4,6 +4,8 @@ package com.diary.diaryserver.controller;
 import com.diary.diaryserver.bean.Orders;
 import com.diary.diaryserver.service.OrderService;
 import com.diary.diaryserver.util.ExcelUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,10 +20,10 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
-    @GetMapping("/getorder")
-    public List<Orders> getOrderList(){
-        return orderService.getOrderList();
-    }
+//    @GetMapping("/getorder")
+//    public List<Orders> getOrderList(){
+//        return orderService.getOrderList();
+//    }
 
 
     @PostMapping("/addorder")
@@ -77,14 +79,39 @@ public class OrderController {
     }
 
 
-    @GetMapping("/searchorder")
-    public List<Orders> SearchAdmin(@RequestParam(value = "orderStatus",required = false) String orderStatus,
-                                   @RequestParam(value = "orderNo",required = false) String orderNo,
-                                   @RequestParam(value = "userPhone",required = false) String userPhone){
-//        System.out.println(orderStatus);
-//        System.out.println(orderNo);
-//        System.out.println(userPhone);
-        return orderService.SearchOrder(orderStatus,orderNo,userPhone);
+    @GetMapping("/getorder")
+    public PageInfo GetOrderList(@RequestParam(value = "orderStatus",required = false) String orderStatus,
+                                    @RequestParam(value = "orderNo",required = false) String orderNo,
+                                    @RequestParam(value = "userPhone",required = false) String userPhone,
+                                     @RequestParam(value = "currentPage",required = false) Integer currentPage,
+                                     @RequestParam(value = "pageSize",required = false) Integer pageSize){
+        int isNull = 0;
+
+        if (orderStatus.equals("")){
+            isNull+=1;
+            orderStatus = null;
+        }
+        if (orderNo.equals("")){
+            isNull+=1;
+            orderNo = null;
+        }
+        if (userPhone.equals("")){
+            isNull+=1;
+            userPhone = null;
+        }
+        if (isNull==3){  //三个查询条件都为空的情况
+
+            PageHelper.startPage(currentPage, pageSize);
+            List<Orders> adminList =  orderService.getOrderList();
+            PageInfo<Orders> pageInfo = new PageInfo<Orders>(adminList);
+            return pageInfo;
+        }
+        else {
+            PageHelper.startPage(currentPage, pageSize);
+            List<Orders> adminList =  orderService.SearchOrder(orderStatus,orderNo,userPhone);
+            PageInfo<Orders> pageInfo = new PageInfo<Orders>(adminList);
+            return pageInfo;
+        }
     }
 
     @GetMapping("/findorderByuserId/{userId}")

@@ -2,6 +2,7 @@ package com.diary.diaryserver.service;
 
 import com.diary.diaryserver.bean.Admin;
 import com.diary.diaryserver.bean.Page;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -30,9 +31,9 @@ public interface AdminService {
                                    @Param("admin_state") String admin_state,
                                    @Param("admin_rank") String admin_rank);
 
-//    List<Admin> pageAdminList(int currPage, int pageSize);
 
-    public Page<Admin> adminPage(int page, int size);
+//    public PageInfo findByPage(int currentPage, int pageSize);
+//    public Page findByPage(int currentPage, int pageSize); //currentPage是启始页数，pageSize是每页显示的记录数
 }
 
 
